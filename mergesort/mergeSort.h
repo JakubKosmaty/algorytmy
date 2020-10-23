@@ -2,10 +2,10 @@
 // Created by Jakub Kosmaty on 23/10/2020.
 //
 
-#ifndef MERGESORT_MERGESORT_HPP
-#define MERGESORT_MERGESORT_HPP
+#ifndef MERGESORT_MERGESORT_H
+#define MERGESORT_MERGESORT_H
 
-#endif //MERGESORT_MERGESORT_HPP
+#endif //MERGESORT_MERGESORT_H
 
 #include <vector>
 
