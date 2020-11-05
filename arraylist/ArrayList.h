@@ -15,8 +15,8 @@ template<typename T>
 class ArrayList {
 private:
     T*  array;
-    int capacity;
-    int m_size;
+    int capacity; // Current allocated memory
+    int m_size; // Number of elements in an array
 
     void initArray() {
       array = new T[capacity];
