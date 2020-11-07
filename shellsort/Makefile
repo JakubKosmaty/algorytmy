@@ -1,17 +1,21 @@
 CXX := g++
-LDFLAGS := -Wall -std=c++17
-CFLAGS := -Wall -std=c++17
-OBJECTS := main.o shellSort.o
-SRCS := $(patsubst %.o,%.h,$(OBJECTS))
-TARGET := main.out
+CFLAGS := -std=c++17 -Wall
+LDFLAGS := -std=c++17 -Wall
 
-%.o: %.cpp $(SRCS)
-	$(CXX) $(LDFLAGS) -c $< -o $@
+.PHONY: all clean
 
-$(TARGET): $(OBJECTS)
-	$(CXX) $(CFLAGS) $(LIBS) $(OBJECTS) -o $(TARGET)
+all: main.out shellSort.o
 
-.PHONY: clean
+main.out: main.o shellSort.o
+main.o: main.cpp shellSort.h
+
+shellSort.o: shellSort.cpp
+
+%.out: %.o
+	$(CXX) $(LDFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -c -o $@ $<
 
 clean:
 	find . -name ".DS_Store" -delete; $(RM) *.o *.out

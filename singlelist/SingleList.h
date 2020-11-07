@@ -92,6 +92,7 @@ public:
     }
 
     void pop_front() {
+      assert(!empty());
       SingleNode<T>* node = head;
       if (head == tail) {
         head = tail = nullptr;
@@ -102,6 +103,7 @@ public:
     }
 
     void pop_back() {
+      assert(!empty());
       SingleNode<T>* node = tail;
       if (head == tail) {
         head = tail = nullptr;

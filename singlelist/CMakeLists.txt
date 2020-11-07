@@ -3,4 +3,4 @@ project(singlelist)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(singlelist main.cpp Singlelist.h)
+add_executable(singlelist main.cpp SingleList.h)
