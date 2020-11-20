@@ -7,7 +7,7 @@ LDFLAGS := -std=c++17 -Wall
 all: main.out
 
 main.out: main.o
-main.o: main.cpp SingleList.h
+main.o: main.cpp DoubleList.h
 
 %.out: %.o
 	$(CXX) $(LDFLAGS) -o $@ $^
