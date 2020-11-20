@@ -79,13 +79,17 @@ void testClear() {
 
 void testIndex() {
   DoubleList<char> doubleList;
+
   doubleList.push_back('s');
   doubleList.push_back('d');
   doubleList.push_back('c');
-  doubleList.push_back('a');
-  doubleList.push_back('t');
 
-  assert(doubleList.index('c') == 2);
+  doubleList[0] = '1';
+  doubleList[1] = '2';
+  doubleList[2] = 'd';
+
+  assert(doubleList.index('d') == 2);
+  assert(doubleList.index('u') == -1);
 }
 
 void testOperatorOver() {
@@ -137,6 +141,7 @@ void testOperators() {
 
   for (int i = 0; i < copyList.size(); ++i) {
     assert(copyList[i] == doubleList[i]);
+    assert(copyList2[i] == doubleList[i]);
   }
 }
 
@@ -153,12 +158,5 @@ int main() {
   testSize();
   testDisplayAndReversed();
   testOperators();
-
-  DoubleList<char> doubleList;
-  doubleList.push_back('a');
-  doubleList.push_back('b');
-  doubleList.push_back('c');
-  doubleList.push_back('d');
-
   return 0;
 }
