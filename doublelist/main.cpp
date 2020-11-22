@@ -145,6 +145,23 @@ void testOperators() {
   }
 }
 
+void testMoveConstr() {
+  DoubleList<char> doubleList;
+  doubleList.push_back('a');
+  doubleList.push_back('b');
+  doubleList.push_back('c');
+  doubleList.push_back('d');
+
+
+  DoubleList<char> doubleList2(std::move(doubleList));
+
+  assert(doubleList.empty());
+  assert(doubleList2[0] == 'a');
+  assert(doubleList2[1] == 'b');
+  assert(doubleList2[2] == 'c');
+  assert(doubleList2[3] == 'd');
+}
+
 int main() {
   testPushFront();
   testPushBack();
@@ -158,5 +175,6 @@ int main() {
   testSize();
   testDisplayAndReversed();
   testOperators();
+  testMoveConstr();
   return 0;
 }
