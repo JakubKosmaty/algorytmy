@@ -39,13 +39,10 @@ public:
     }
 
     DoubleList(DoubleList&& other) {
-      head = nullptr;
-      tail = nullptr;
-      DoubleNode<T>* current = other.head;
-      while (current != nullptr) {
-        push_back(current->value);
-        current = current->next;
-      }
+      head = other.head;
+      other.head = nullptr;
+      tail = other.tail;
+      other.tail = nullptr;
     }
 
     DoubleList& operator=(const DoubleList& other) {
@@ -68,11 +65,10 @@ public:
       }
 
       clear();
-      DoubleNode<T>* current = other.head;
-      while (current != nullptr) {
-        push_back(current->value);
-        current = current->next;
-      }
+      head = other.head;
+      other.head = nullptr;
+      tail = other.tail;
+      other.tail = nullptr;
       return *this;
     }
 
@@ -126,7 +122,6 @@ public:
       } else {
         head = tail = new DoubleNode<T>(std::move(item));
       }
-
     }
 
     T& front() const {
