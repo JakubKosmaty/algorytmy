@@ -48,8 +48,7 @@ public:
         head = std::move(other.head);
         tail = std::move(other.tail);
         tab = std::move(other.tab);
-
-        other.tab = nullptr;
+        other.init();
     }
 
     MyQueue& operator=(const MyQueue& other) {
@@ -77,7 +76,7 @@ public:
         head = std::move(other.head);
         tail = std::move(other.tail);
         tab = std::move(other.tab);
-        other.tab = nullptr;
+        other.init();
 
         return *this;
     }

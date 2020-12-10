@@ -3,4 +3,4 @@ project(priorityqueue)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(priorityqueue main.cpp)
+add_executable(priorityqueue main.cpp PriorityQueue.h)

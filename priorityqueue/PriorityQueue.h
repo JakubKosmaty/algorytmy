@@ -5,7 +5,6 @@
 #ifndef PRIORITY_QUEUE_PRIORITYQUEUE_H
 #define PRIORITY_QUEUE_PRIORITYQUEUE_H
 
-
 template <typename T>
 struct SingleNode {
     T value;
@@ -93,7 +92,7 @@ public:
             head = tempNode;
         }
         else {
-            while (node->next != NULL && priority < node->next->priority) {
+            while (node->next != nullptr && priority < node->next->priority) {
                 node = node->next;
             }
             tempNode->next = node->next;
@@ -116,7 +115,7 @@ public:
             head = tempNode;
         }
         else {
-            while (node->next != NULL && priority < node->next->priority) {
+            while (node->next != nullptr && priority < node->next->priority) {
                 node = node->next;
             }
             tempNode->next = node->next;
