@@ -78,25 +78,24 @@ public:
     }
 
     void push(const T& item, const int priority) {
-        SingleNode<T>* tempNode = new SingleNode<T>(item, priority);
+        SingleNode<T>* tempHead = new SingleNode<T>(item, priority);
 
         if (empty()) {
-            head = tempNode;
+            head = tempHead;
             return;
         }
 
         SingleNode<T>* node = head;
 
         if (head->priority < priority) {
-            tempNode->next = head;
-            head = tempNode;
-        }
-        else {
+          tempHead->next = head;
+            head = tempHead;
+        } else {
             while (node->next != nullptr && priority < node->next->priority) {
                 node = node->next;
             }
-            tempNode->next = node->next;
-            node->next = tempNode;
+            tempHead->next = node->next;
+            node->next = tempHead;
         }
     }
 
