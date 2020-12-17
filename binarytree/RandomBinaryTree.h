@@ -23,91 +23,10 @@ template <typename T>
 class RandomBinaryTree {
 private:
     BSTNode<T>* root;
-
-    int count_leafs_helper(BSTNode<T>* node) {
-      if (node == nullptr) {
-        return 0;
-      }
-      if (node->left == nullptr && node->right == nullptr) {
-        return 1;
-      } else {
-        return count_leafs_helper(node->left) + count_leafs_helper(node->right);
-      }
-    }
-
-    int iter_count_leafs_helper() {
-      if (root == nullptr) {
-        return 0;
-      }
-
-      std::queue<BSTNode<T>*> queueTemp;
-      BSTNode<T>* nodeTemp = root;
-      queueTemp.push(nodeTemp);
-      int count = 0;
-      while (!queueTemp.empty()) {
-        nodeTemp = queueTemp.front();
-        queueTemp.pop();
-        if (nodeTemp->left != nullptr) {
-          queueTemp.push(nodeTemp->left);
-        }
-        if (nodeTemp->right != nullptr) {
-          queueTemp.push(nodeTemp->right);
-        }
-        if (nodeTemp->left == nullptr && nodeTemp->right == nullptr) {
-          count++;
-        }
-      }
-      return count;
-    }
-
-    int find_max_min_helper(BSTNode<T>* node, const int type) {
-      if (node == nullptr) {
-        return type == 0 ? INT_MAX : INT_MIN;
-      }
-
-      int value = node->value;
-      int left = find_max_min_helper(node->left, type);
-      int right = find_max_min_helper(node->right, type);
-
-      if ((type == 0) ? value > left : value < left) {
-        value =  left;
-      }
-
-      if ((type == 0) ? value > right : value < right) {
-        value = right;
-      }
-      return value;
-    }
-
-    int iter_find_max_min_helper(const int type) {
-      std::queue<BSTNode<T>*> queueTemp;
-      BSTNode<T>* nodeTemp = root;
-      queueTemp.push(nodeTemp);
-      int minMax = type == 0 ? INT_MAX : INT_MIN;
-      while (!queueTemp.empty()) {
-        nodeTemp = queueTemp.front();
-        queueTemp.pop();
-
-        if ((type == 0) ? minMax > nodeTemp->value : minMax < nodeTemp->value) {
-          minMax = nodeTemp->value;
-        }
-
-        if (nodeTemp->left != nullptr) {
-          queueTemp.push(nodeTemp->left);
-        }
-        if (nodeTemp->right != nullptr) {
-          queueTemp.push(nodeTemp->right);
-        }
-      }
-      return minMax;
-    }
-
 public:
     RandomBinaryTree() : root(nullptr) {}
 
-    ~RandomBinaryTree() {
-      clear();
-    }
+    ~RandomBinaryTree() {}
 
     bool empty() const {
       return root == nullptr;
@@ -126,32 +45,109 @@ public:
       return ((ptr == nullptr) ? nullptr : &(ptr->value));
     }
 
-    int count_leafs(const int type) {
-      switch (type) {
-        case 0: return count_leafs_helper(root);
-        case 1: return iter_count_leafs_helper();
-        default: return -1;
+    int count_leafs() const {
+      return count_leafs(root);
+    }
+
+    int count_leafs(BSTNode<T>* node) const {
+      if (node == nullptr) {
+        return 0;
+      }
+      if (node->left == nullptr && node->right == nullptr) {
+        return 1;
+      } else {
+        return count_leafs(node->left) + count_leafs(node->right);
       }
     }
 
-    int find_max() {
+    int iter_count_leafs() const {
+      if (root == nullptr) {
+        return 0;
+      }
+
+      std::queue<BSTNode<T>*> queueTemp;
+      BSTNode<T>* nodeTemp = root;
+      queueTemp.push(nodeTemp);
+      int count = 0;
+      while (!queueTemp.empty()) {
+        nodeTemp = queueTemp.front();
+        queueTemp.pop();
+        if (nodeTemp->left != nullptr) {
+          queueTemp.push(nodeTemp->left);
+        }
+
+        if (nodeTemp->right != nullptr) {
+          queueTemp.push(nodeTemp->right);
+        }
+
+        if (nodeTemp->left == nullptr && nodeTemp->right == nullptr) {
+          count++;
+        }
+      }
+      return count;
+    }
+
+    T find_max() const {
       assert(!empty());
       return find_max_min_helper(root, 1);
     }
 
-    int find_min() {
+    T find_min() const {
       assert(!empty());
       return find_max_min_helper(root, 0);
     }
 
-    int iter_find_max() {
+    T iter_find_max() const {
       assert(!empty());
       return iter_find_max_min_helper(1);
     }
 
-    int iter_find_min() {
+    T iter_find_min() const {
       assert(!empty());
       return iter_find_max_min_helper(0);
+    }
+
+    T find_max_min_helper(BSTNode<T>* node, const int type) const {
+      if (node == nullptr) {
+        return type == 0 ? INT_MAX : INT_MIN;
+      }
+
+      T value = node->value;
+      int left = find_max_min_helper(node->left, type);
+      int right = find_max_min_helper(node->right, type);
+
+      if ((type == 0) ? value > left : value < left) {
+        value =  left;
+      }
+
+      if ((type == 0) ? value > right : value < right) {
+        value = right;
+      }
+      return value;
+    }
+
+    T iter_find_max_min_helper(const int type) const {
+      std::queue<BSTNode<T>*> queueTemp;
+      BSTNode<T>* nodeTemp = root;
+      queueTemp.push(nodeTemp);
+      T minMax = type == 0 ? INT_MAX : INT_MIN;
+      while (!queueTemp.empty()) {
+        nodeTemp = queueTemp.front();
+        queueTemp.pop();
+
+        if ((type == 0) ? minMax > nodeTemp->value : minMax < nodeTemp->value) {
+          minMax = nodeTemp->value;
+        }
+
+        if (nodeTemp->left != nullptr) {
+          queueTemp.push(nodeTemp->left);
+        }
+
+        if (nodeTemp->right != nullptr) {
+          queueTemp.push(nodeTemp->right);
+        }
+      }
+      return minMax;
     }
 
     void preorder() {
@@ -171,7 +167,7 @@ public:
         return;
       }
       std::stack<BSTNode<T>*> S;
-      BSTNode<T> *node = root;
+      BSTNode<T>* node = root;
       S.push(node);
       while (!S.empty()) {
         node = S.top();
@@ -200,22 +196,15 @@ public:
         if (node->left != nullptr) {
           Q.push(node->left);
         }
+
         if (node->right != nullptr) {
           Q.push(node->right);
         }
       }
     }
 
-    void clear() {
-      clear(root);
-      root = nullptr;
-    }
     void display() {
       display(root, 0);
-    }
-
-    void clear(BSTNode<T>* node) {
-
     }
 
     BSTNode<T>* insert(BSTNode<T>* node, const T& item) {

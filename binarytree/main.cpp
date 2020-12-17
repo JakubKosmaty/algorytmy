@@ -11,7 +11,7 @@ void testCountLeafs() {
   randomBinaryTree.insert(6);
   randomBinaryTree.insert(4);
 
-  assert(randomBinaryTree.count_leafs(0) == 2);
+  assert(randomBinaryTree.count_leafs() == 2);
 }
 
 void testIterCountLeafs() {
@@ -23,7 +23,7 @@ void testIterCountLeafs() {
   randomBinaryTree.insert(6);
   randomBinaryTree.insert(4);
 
-  assert(randomBinaryTree.count_leafs(1) == 2);
+  assert(randomBinaryTree.iter_count_leafs() == 2);
 }
 
 void testFindMax() {
