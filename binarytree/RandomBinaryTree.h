@@ -24,18 +24,18 @@ class RandomBinaryTree {
 private:
     BSTNode<T>* root;
 
-    int countHelper(BSTNode<T>* node) {
+    int count_leafs_helper(BSTNode<T>* node) {
       if (node == nullptr) {
         return 0;
       }
       if (node->left == nullptr && node->right == nullptr) {
         return 1;
       } else {
-        return countHelper(node->left) + countHelper(node->right);
+        return count_leafs_helper(node->left) + count_leafs_helper(node->right);
       }
     }
 
-    int iter_count_leafs() {
+    int iter_count_leafs_helper() {
       if (root == nullptr) {
         return 0;
       }
@@ -128,8 +128,8 @@ public:
 
     int count_leafs(const int type) {
       switch (type) {
-        case 0: return countHelper(root);
-        case 1: return iter_count_leafs();
+        case 0: return count_leafs_helper(root);
+        case 1: return iter_count_leafs_helper();
         default: return -1;
       }
     }
