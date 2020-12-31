@@ -10,12 +10,12 @@ Maze::Maze() {
 
   CONSOLE_CLEAR;
   CONSOLE_POS(1, 1);
-  CONSOLE_COLOR_TEXT(BLUE, "Podaj wymiary labiryntu: <wysokosc, szerokosc>\n");
+  CONSOLE_COLOR_TEXT(BLUE, "Enter the size of the maze: <rows, cols>\n");
   std::cin >> i >> j;
 
   int delay = 0;
   CONSOLE_POS(4, 1);
-  CONSOLE_COLOR_TEXT(BLUE, "Podaj opoznienie w generowaniu: <milisekundy>\n");
+  CONSOLE_COLOR_TEXT(BLUE, "Enter the generation delay: <ms>\n");
   std::cin >> delay;
 
   rows = i;
@@ -150,9 +150,9 @@ void Maze::printMaze(bool last) const {
   CONSOLE_POS(1, 1);
 
   if (last) {
-    CONSOLE_COLOR_TEXT(CYAN, "Koniec!");
+    CONSOLE_COLOR_TEXT(CYAN, "Finish!");
   } else {
-    CONSOLE_COLOR_TEXT(GREEN, "Generowanie labiryntu...");
+    CONSOLE_COLOR_TEXT(GREEN, "Maze generating...");
   }
 
   for (auto & cell : cells) {
