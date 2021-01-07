@@ -13,8 +13,7 @@ int main() {
   CONSOLE_COLOR_TEXT(BLUE, "Enter the generation delay: <ms>\n");
   std::cin >> delay;
 
-  Maze maze;
-  maze.initCells(rows, cols);
-  maze.generate(delay);
+  Maze maze(rows, cols, delay);
+  maze.generate();
   return 0;
 }

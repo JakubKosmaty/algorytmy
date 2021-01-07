@@ -4,9 +4,10 @@
 
 #include <Maze.h>
 
-void Maze::initCells(int rows, int cols) {
+Maze::Maze(int rows, int cols, int delay) {
   this->rows = rows;
   this->cols = cols;
+  this->delay = delay;
 
   cells.resize(rows);
   for (unsigned i = 0; i < cells.size(); ++i) {
@@ -17,7 +18,7 @@ void Maze::initCells(int rows, int cols) {
   }
 }
 
-void Maze::generate(const int delay) {
+void Maze::generate() {
   current = cells[randNumber(0, rows - 1)][randNumber(0, cols - 1)];
   std::stack<Cell*> backTrackStack;
 
@@ -52,16 +53,16 @@ Cell* Maze::getUnVisitedNeighbors() {
   int currentCol = current->getCol();
   int currentRow = current->getRow();
 
-  int dir[4][2] = {
-      {0, 1},
-      {0, -1},
-      {1, 0},
-      {-1, 0}
+  std::pair<int, int> dir[4] = {
+    std::make_pair(0, 1),
+    std::make_pair(0, -1),
+    std::make_pair(1, 0),
+    std::make_pair(-1, 0),
   };
 
-  for (auto & i : dir) {
-    int tempCol = currentCol + i[0];
-    int tempRow = currentRow + i[1];
+  for (auto & p : dir) {
+    int tempCol = currentCol + p.first;
+    int tempRow = currentRow + p.second;
 
     if(isColValid(tempCol) && isRowValid(tempRow) && !cells[tempRow][tempCol]->isVisited()) {
       neighbors.push_back(cells[tempRow][tempCol]);

@@ -17,6 +17,7 @@ class Maze {
 private:
     int rows;
     int cols;
+    int delay;
 
     std::vector<std::vector<Cell*>> cells;
     Cell* current;
@@ -32,10 +33,10 @@ private:
 
     void printMaze(bool last = false) const;
 public:
+    Maze(int rows, int cols, int delay);
     virtual ~Maze();
 
-    void initCells(int rows, int cols);
-    void generate(const int delay);
+    void generate();
 };
 
 #endif //MAZE_GENERATOR_MAZE_H
