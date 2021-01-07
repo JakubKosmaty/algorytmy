@@ -10,22 +10,22 @@ Cell::Cell(int row, int col) : walls{true, true, true, true}, visited(false) {
 }
 
 void Cell::print() {
-  if (walls[0]) {
+  if (walls[TOP]) {
     CONSOLE_POS(row + SHIFT, col * 2 + 2 + SHIFT);
     CONSOLE_COLOR_TEXT(RED, "_");
   }
 
-  if (walls[1]) {
+  if (walls[RIGHT]) {
     CONSOLE_POS(row + 1 + SHIFT, col * 2 + 3 + SHIFT);
     CONSOLE_COLOR_TEXT(RED, "|");
   }
 
-  if (walls[2]) {
+  if (walls[BOTTOM]) {
     CONSOLE_POS(row + 1 + SHIFT, col * 2 + 2 + SHIFT);
     CONSOLE_COLOR_TEXT(RED, "_");
   }
 
-  if (walls[3]) {
+  if (walls[LEFT]) {
     CONSOLE_POS(row + 1 + SHIFT, col * 2 + 1 + SHIFT);
     CONSOLE_COLOR_TEXT(RED, "|");
   }

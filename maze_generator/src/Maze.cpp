@@ -4,27 +4,10 @@
 
 #include <Maze.h>
 
-Maze::Maze() {
-  int i;
-  int j;
+void Maze::initCells(int rows, int cols) {
+  this->rows = rows;
+  this->cols = cols;
 
-  CONSOLE_CLEAR;
-  CONSOLE_POS(1, 1);
-  CONSOLE_COLOR_TEXT(BLUE, "Enter the size of the maze: <rows, cols>\n");
-  std::cin >> i >> j;
-
-  int delay = 0;
-  CONSOLE_POS(4, 1);
-  CONSOLE_COLOR_TEXT(BLUE, "Enter the generation delay: <ms>\n");
-  std::cin >> delay;
-
-  rows = i;
-  cols = j;
-
-  generate(delay);
-}
-
-void Maze::initCells() {
   cells.resize(rows);
   for (unsigned i = 0; i < cells.size(); ++i) {
     cells[i].resize(cols);
@@ -35,8 +18,6 @@ void Maze::initCells() {
 }
 
 void Maze::generate(const int delay) {
-  initCells();
-
   current = cells[randNumber(0, rows - 1)][randNumber(0, cols - 1)];
   std::stack<Cell*> backTrackStack;
 
@@ -49,7 +30,7 @@ void Maze::generate(const int delay) {
     }
 
     current->setVisited(true);
-    Cell* next = getNeighbors();
+    Cell* next = getUnVisitedNeighbors();
     if (next != nullptr) {
       next->setVisited(true);
       backTrackStack.push(current);
@@ -64,7 +45,8 @@ void Maze::generate(const int delay) {
   printMaze(true);
 }
 
-Cell* Maze::getNeighbors() {
+// Rand one of unvisited neighbors
+Cell* Maze::getUnVisitedNeighbors() {
   std::vector<Cell*> neighbors;
 
   int currentCol = current->getCol();
@@ -118,6 +100,7 @@ int Maze::randNumber(int from, int to) const {
   return distrib(gen);
 }
 
+// Remove walls between current and next
 void Maze::removeWalls(Cell *next) {
   int currentRow = current->getRow();
   int currentCol = current->getCol();
@@ -125,23 +108,23 @@ void Maze::removeWalls(Cell *next) {
   int nextCol = next->getCol();
 
   if(currentCol == nextCol && currentRow == nextRow + 1) {
-    current->setWall(0, false);
-    next->setWall(2, false);
+    current->setWall(TOP, false);
+    next->setWall(BOTTOM, false);
   }
 
   if(currentCol == nextCol && currentRow == nextRow - 1) {
-    current->setWall(2, false);
-    next->setWall(0, false);
+    current->setWall(BOTTOM, false);
+    next->setWall(TOP, false);
   }
 
   if(currentCol == nextCol + 1 && currentRow == nextRow) {
-    current->setWall(3, false);
-    next->setWall(1, false);
+    current->setWall(LEFT, false);
+    next->setWall(RIGHT, false);
   }
 
   if(currentCol == nextCol - 1 && currentRow == nextRow) {
-    current->setWall(1, false);
-    next->setWall(3, false);
+    current->setWall(RIGHT, false);
+    next->setWall(LEFT, false);
   }
 }
 

@@ -21,10 +21,7 @@ private:
     std::vector<std::vector<Cell*>> cells;
     Cell* current;
 
-    Cell* getNeighbors();
-
-    void initCells();
-    void generate(const int delay);
+    Cell* getUnVisitedNeighbors();
 
     void removeWalls(Cell* next);
 
@@ -35,8 +32,10 @@ private:
 
     void printMaze(bool last = false) const;
 public:
-    Maze();
     virtual ~Maze();
+
+    void initCells(int rows, int cols);
+    void generate(const int delay);
 };
 
 #endif //MAZE_GENERATOR_MAZE_H

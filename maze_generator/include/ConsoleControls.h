@@ -22,4 +22,8 @@ enum textColors {
     LIGHTGRAY,
 };
 
+enum DIRECTIONS {
+    TOP = 0, RIGHT, BOTTOM, LEFT
+};
+
 #endif //MAZE_GENERATOR_CONSOLECONTROLS_H
