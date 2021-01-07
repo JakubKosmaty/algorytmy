@@ -6,4 +6,4 @@
 ## Compile
 - Via Makefile using `make`
 ## Preview 
-![](https://raw.githubusercontent.com/JakubKosmaty/algorytmy/master/maze_generator/preview.gif?token=AE5YUYNWML3ZB35L7ORB65S7642Z4)
+![](https://raw.githubusercontent.com/JakubKosmaty/algorytmy/master/maze_generator/preview.gif?token=AE5YUYIDM6PKPIYQVBA7JCDAACF3G)
