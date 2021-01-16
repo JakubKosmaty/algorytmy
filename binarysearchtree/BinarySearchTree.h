@@ -71,6 +71,7 @@ public:
     }
 
     T find_max() const {
+      assert(!empty());
       BSTNode<T>* tempNode = root;
       while (tempNode->right != nullptr) {
         tempNode = tempNode->right;
@@ -80,6 +81,7 @@ public:
     }
 
     T find_min() const {
+      assert(!empty());
       BSTNode<T>* tempNode = root;
       while (tempNode->left != nullptr) {
         tempNode = tempNode->left;
